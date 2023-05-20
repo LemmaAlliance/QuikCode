@@ -67,7 +67,7 @@ int main()
     cout << "File contents:\n" << contents << endl << "length: " << contents.length() << endl;
 
     int end = 0;
-    int cursor = 0;//This cursor is relative
+    int cursor = -1; // Initialize cursor to -1
     string currentChar;
     bool stateEnd = false;
     string statement;
@@ -78,16 +78,17 @@ int main()
         statement = foundKeywords[0][0];
         cout << "keyword: " << foundKeywords[0][0] << " length: " << foundKeywords.size() << endl;
         cout << "end: " << end << endl;
-        
-        while(stateEnd == false)
+
+        while (stateEnd == false)
         {
             cursor++;
             currentChar = contents[cursor];
-            if(currentChar == ";")
+            if (currentChar == ";")
             {
                 stateEnd = true;
                 statements.insert(statements.begin(), statement);
-            }else
+            }
+            else
             {
                 statement += currentChar;
             }

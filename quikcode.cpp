@@ -25,7 +25,7 @@ vector<string> decoder(string contents, list<string> keywords, int currentPlace)
                 currentKeyword += currentLetter;
                 if(currentKeyword.length()>=targetKeyword.length())
                 {
-                    return {targetKeyword ,to_string(currentKeyword.length()+currentPlace)};
+                    return {targetKeyword , to_string(currentPlace),to_string(currentKeyword.length()+currentPlace)};
                 }
             }else
             {
@@ -63,12 +63,21 @@ int main()
     buffer << file.rdbuf();
     string contents = buffer.str();
 
-    cout << "File contents:\n" << contents << endl << endl;
+    cout << "File contents:\n" << contents << endl << "length: " << contents.length() << endl;
 
-    foundKeywords.insert(foundKeywords.begin(), decoder(contents, keywords, 0));
+    int end = 0;
+    while (end <= (contents.length() - 1))
+    {
+        foundKeywords.insert(foundKeywords.begin(), decoder(contents, keywords, end));
+        end = stoi(foundKeywords[0][2]);
+        cout << "keyword: " << foundKeywords[0][0] << " length: " << foundKeywords.size() << endl;
+        cout << "end: " << end << endl;
+    }
 
-    cout << "First keyword found: " << foundKeywords[0][0] << endl;
-    cout << "Second keyword found: " << decoder(contents, keywords, 5).front() << endl;
+    for (int i = 0; i < foundKeywords.size(); i++)
+    {
+        cout << "Keyword " << i << " in foundKeywords is: " << foundKeywords[i][0] << endl;
+    }
     
     return 0;
 }

@@ -89,7 +89,7 @@ int main()
                 statements.insert(statements.begin(), statement);
             }else
             {
-                statement.append(currentChar);
+                statement += currentChar;
             }
         }
     }

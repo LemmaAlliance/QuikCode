@@ -55,6 +55,7 @@ int main()
     string path;
     list<string> keywords = {"print", "if"};
     vector<std::vector<string>> foundKeywords;
+    vector<string> statements;
     cout << "What is the full path of your code: ";
     cin >> path;
 
@@ -66,17 +67,36 @@ int main()
     cout << "File contents:\n" << contents << endl << "length: " << contents.length() << endl;
 
     int end = 0;
+    int cursor = 0;//This cursor is relative
+    string currentChar;
+    bool stateEnd = false;
+    string statement;
     while (end <= (contents.length() - 1))
     {
         foundKeywords.insert(foundKeywords.begin(), decoder(contents, keywords, end));
         end = stoi(foundKeywords[0][2]);
+        statement = foundKeywords[0][0];
         cout << "keyword: " << foundKeywords[0][0] << " length: " << foundKeywords.size() << endl;
         cout << "end: " << end << endl;
+        
+        while(stateEnd == false)
+        {
+            cursor++;
+            currentChar = contents[cursor];
+            if(currentChar == ";")
+            {
+                stateEnd = true;
+                statements.insert(statements.begin(), statement);
+            }else
+            {
+                statement.append(currentChar);
+            }
+        }
     }
 
-    for (int i = 0; i < foundKeywords.size(); i++)
+    for (int i = 0; i < statements.size(); i++)
     {
-        cout << "Keyword " << i << " in foundKeywords is: " << foundKeywords[i][0] << endl;
+        cout << "Statement " << i << " in statements is: " << statements[i] << endl;
     }
     
     return 0;

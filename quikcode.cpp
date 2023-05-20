@@ -7,7 +7,7 @@
 using namespace std;
 
 
-list<string> decoder(string contents, list<string> keywords, int currentPlace)
+vector<string> decoder(string contents, list<string> keywords, int currentPlace)
 {
     char currentLetter;
     string currentKeyword;
@@ -54,8 +54,7 @@ int main()
 {
     string path;
     list<string> keywords = {"print", "if"};
-    list<list<string>> foundKeywords = {};
-    list<list<string>>::iterator it = foundKeywords.begin();
+    vector<std::vector<string>> foundKeywords;
     cout << "What is the full path of your code: ";
     cin >> path;
 
@@ -64,13 +63,11 @@ int main()
     buffer << file.rdbuf();
     string contents = buffer.str();
 
-    cout << "File contents:\n" << contents << endl;
+    cout << "File contents:\n" << contents << endl << endl;
 
-    foundKeywords.push_front(decoder(contents, keywords, 0));
+    foundKeywords.insert(foundKeywords.begin(), decoder(contents, keywords, 0));
 
-    advance(it, 0);
-    list<string> element = *it;
-    cout << "First keyword found: " << element.front() << endl;
+    cout << "First keyword found: " << foundKeywords[0][0] << endl;
     cout << "Second keyword found: " << decoder(contents, keywords, 5).front() << endl;
     
     return 0;

@@ -102,8 +102,12 @@ int main()
     for(int i=0; i<=(statements.size()-1);)
     {
         //Repeates every statement
+        int test = statements[i].length()+statements[i+1].length();
         substateCursor = stoi(foundKeywords[i][2]);
-        while(substateCursor < statements[i].length()-1)
+        cout << "foundKeywords[i][1]: " << foundKeywords[i][1] << endl;
+        cout << "Current statement length is: " << statements[i].length() << endl;
+        cout << "test: " << test << endl;
+        while(substateCursor < (stoi(foundKeywords[i][1]) - (statements[i].length())))
         {
             current = statements[i][substateCursor];
             //Check if a statement is being opened

@@ -85,6 +85,11 @@ int main()
         {
             cursor++;
             currentChar = contents[cursor-1];
+            if(cursor > (contents.length()))
+            {
+                cout << "Expected \";\" at : " << foundKeywords[0][2] << endl << "(You need to end the statment)" << endl;
+                return -1;
+            }
             if(currentChar == ";")
             {
                 statement += currentChar;
@@ -98,9 +103,14 @@ int main()
         }
     }
 
+    /*for(int i = 0; i < statements.size();)
+    {
+        
+    }*/
+
     for (int i = 0; i < statements.size(); i++)
     {
-        cout << "Statement " << i << " in statements is: " << statements[i] << endl;
+        cout << "Statement " << i+1 << " in statements is: " << statements[i] << endl;
     }
     
     return 0;

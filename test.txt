@@ -1,1 +1,1 @@
-print(aksdkl);if(aksj);
+print;if;

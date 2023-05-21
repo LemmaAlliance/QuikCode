@@ -107,6 +107,7 @@ int main()
     bool substateEnd = false;
     int substateCursor = 0;
     substatements.resize(statements.size());
+    cout << "Statments.size(): " << statements.size() << endl;
     //Look for brackets
     int b = 0;
     while(b < statements.size())

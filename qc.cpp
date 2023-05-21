@@ -54,9 +54,8 @@ int main()
 {
     string path;
     list<string> keywords = {"print", "if"};
-    vector<vector<string>> foundKeywords;
+    vector<std::vector<string>> foundKeywords;
     vector<string> statements;
-    vector<string> substatements;
     cout << "What is the full path of your code: ";
     cin >> path;
 
@@ -84,12 +83,8 @@ int main()
 
         while(stateEnd == false)
         {
-            currentChar = contents[cursor];
-            if(cursor > (contents.length()))
-            {
-                cout << "Expected \";\" at: " << foundKeywords[0][2] << endl << "(You need to end the statment)" << endl;
-                return -1;
-            }
+            cursor++;
+            currentChar = contents[cursor-1];
             if(currentChar == ";")
             {
                 statement += currentChar;
@@ -100,59 +95,12 @@ int main()
             {
                 statement += currentChar;
             }
-            cursor++;
         }
-    }
-
-    bool substateEnd = false;
-    int substateCursor = 0;
-    substatements.resize(statements.size());
-    cout << "Statments.size(): " << statements.size() << endl;
-    //Look for brackets
-    int b = 0;
-    while(b < statements.size())
-    {
-        end = stoi(foundKeywords[b][2]);
-        cout << endl << "Current statement: " << statements[b] << endl;
-        substateEnd = false;
-        stateEnd = false;
-        while (stateEnd == false)
-        {
-            cout << "Starting while loop" << endl;
-            end = stoi(foundKeywords[b][2]);
-            if(statements[b][end] == '(')
-            {
-                //Opening of a "substatement"
-                cout << "Found opening of a substatement" << endl;
-                substateCursor = end;
-                while(substateEnd == false)
-                {
-                    substateCursor++;
-                    if(statements[b][substateCursor] == ')')
-                    {
-                        cout << "Found closing of a substatement at: " << statements[b][substateCursor] << endl;
-                        substatements[b] += statements[b][substateCursor];
-                        substateEnd = true;
-                    }else
-                    {
-                        substatements[b] += statements[b][substateCursor];
-                        cout << "Could not find closing substatement char at: " << substateCursor << " (" << statements[b][substateCursor] << ")" << endl;
-                    }
-                }
-            }
-            if(statements[b][end] != ';' && statements[b][end] != '(')
-            {
-                cout << "You did not include a substatement in that statement  nor did you end the statement on the next char." << endl;
-                return -1;
-            }
-        }
-        b++;
     }
 
     for (int i = 0; i < statements.size(); i++)
     {
-        cout << "Statement " << i+1 << " in statements is: " << statements[i] << endl;
-        cout << "Substatement " << i+1 << " in substatments is: " << substatements[i] << endl;
+        cout << "Statement " << i << " in statements is: " << statements[i] << endl;
     }
     
     return 0;

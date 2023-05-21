@@ -106,16 +106,20 @@ int main()
 
     bool substateEnd = false;
     int substateCursor = 0;
+    substatements.resize(statements.size());
     //Look for brackets
-    for(int i = 0; i < statements.size();)
+    int b = 0;
+    while(b < statements.size())
     {
-        end = stoi(foundKeywords[i][2]);
-        cout << endl << "Current statement: " << statements[i] << endl;
+        end = stoi(foundKeywords[b][2]);
+        cout << endl << "Current statement: " << statements[b] << endl;
         substateEnd = false;
         stateEnd = false;
         while (stateEnd == false)
         {
-            if(statements[i][end] == '(')
+            cout << "Starting while loop" << endl;
+            end = stoi(foundKeywords[b][2]);
+            if(statements[b][end] == '(')
             {
                 //Opening of a "substatement"
                 cout << "Found opening of a substatement" << endl;
@@ -123,20 +127,25 @@ int main()
                 while(substateEnd == false)
                 {
                     substateCursor++;
-                    if(statements[i][substateCursor] == ')')
+                    if(statements[b][substateCursor] == ')')
                     {
-                        cout << "Found closing of a substatement at: " << statements[i][substateCursor] << endl;
-                        substatements[i] += statements[i][substateCursor];
+                        cout << "Found closing of a substatement at: " << statements[b][substateCursor] << endl;
+                        substatements[b] += statements[b][substateCursor];
                         substateEnd = true;
                     }else
                     {
-                        substatements[i] += statements[i][substateCursor];
-                        cout << "Could not find closing substatement char at: " << substateCursor << " (" << statements[i][substateCursor] << ")" << endl;
+                        substatements[b] += statements[b][substateCursor];
+                        cout << "Could not find closing substatement char at: " << substateCursor << " (" << statements[b][substateCursor] << ")" << endl;
                     }
                 }
             }
+            if(statements[b][end] != ';' && statements[b][end] != '(')
+            {
+                cout << "You did not include a substatement in that statement  nor did you end the statement on the next char." << endl;
+                return -1;
+            }
         }
-        i++;
+        b++;
     }
 
     for (int i = 0; i < statements.size(); i++)

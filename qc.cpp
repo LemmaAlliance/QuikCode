@@ -79,14 +79,16 @@ int main()
         cout << "keyword: " << foundKeywords[0][0] << " length: " << foundKeywords.size() << endl;
         cout << "end: " << end << endl;
         stateEnd = false;
-        cursor += end;
+        cursor = end;
 
         while(stateEnd == false)
         {
             cursor++;
-            currentChar = contents[cursor];
+            currentChar = contents[cursor-1];
             if(currentChar == ";")
             {
+                statement += currentChar;
+                end = cursor;
                 stateEnd = true;
                 statements.insert(statements.begin(), statement);
             }else

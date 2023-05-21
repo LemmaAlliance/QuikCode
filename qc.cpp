@@ -54,7 +54,7 @@ int main()
 {
     string path;
     list<string> keywords = {"print", "if"};
-    vector<std::vector<string>> foundKeywords;
+    vector<vector<string>> foundKeywords;
     vector<string> statements;
     cout << "What is the full path of your code: ";
     cin >> path;
@@ -97,10 +97,37 @@ int main()
             }
         }
     }
+    int substateCursor = 0;
+    char current;
+    for(int i=0; i<=(statements.size()-1);)
+    {
+        //Repeates every statement
+        substateCursor = stoi(foundKeywords[i][2]);
+        while(substateCursor < statements[i].length()-1)
+        {
+            current = statements[i][substateCursor];
+            cout << "Current char: " << current << " @ char " << substateCursor << endl;
+            //Check if a statement is being opened
+            if(current == '(')
+            {
+                cout << "Statment opened @: " << substateCursor << endl;
+            }else if(current == ')')
+            {
+                cout << "Statement closed @: " << substateCursor << endl;
+            }else
+            {
+                cout << "Nothing of intrest @: " << substateCursor << endl;
+            }
+            substateCursor++;
+        }
+        cout << "Cursor is at: " << substateCursor << endl;
+        i++;
+    }
 
     for (int i = 0; i < statements.size(); i++)
     {
         cout << "Statement " << i << " in statements is: " << statements[i] << endl;
+        cout << "Keyword " << i << " in foundkeywords is: " << foundKeywords[i][0] << endl;
     }
     
     return 0;

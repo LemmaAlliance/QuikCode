@@ -1,1 +1,1 @@
-print;if;
+print(asdas);if(ahsj);

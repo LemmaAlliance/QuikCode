@@ -106,7 +106,6 @@ int main()
         while(substateCursor < statements[i].length()-1)
         {
             current = statements[i][substateCursor];
-            cout << "Current char: " << current << " @ char " << substateCursor << endl;
             //Check if a statement is being opened
             if(current == '(')
             {

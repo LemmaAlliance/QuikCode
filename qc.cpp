@@ -29,7 +29,7 @@ vector<string> decoder(string contents, list<string> keywords, int currentPlace)
                 }
             }else
             {
-                return {"Could not find keyword on first attempt"};
+                return {NULL, NULL, NULL};
             }
         }
         

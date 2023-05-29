@@ -10,7 +10,7 @@ If you have any suggestions or don't want to code but have a more effiecient way
 ## Compiling
 To compile from source just run the command to compile a program in your favourite compiler
 
-e.g. minGW:
+e.g. minGW(my compiler):
 ```
 c++ qc.cpp -o qc.exe
 ```

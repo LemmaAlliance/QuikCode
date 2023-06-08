@@ -3,6 +3,7 @@ QuikCode is a language I am working on, it is still in development and in its ve
 ## How does it work
 QuikCode's compiler is currently being written in C++ but if a better language comes up I may switch to it.
 ## Contributing
+This project needs contributers!
 ### Coding
 If you want to, feel free to fork this repo and give it your best shot at fixing any bugs or improving the language.
 ### Suggestions
